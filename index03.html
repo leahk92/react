@@ -1,0 +1,81 @@
+<!-- JSX 두번 째 -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- 바벨 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // JSX
+    function Title() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+          안녕 나는 title
+        </h3>
+      );
+    }
+    /*
+    const Title = () => (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        안녕 나는 title
+      </h3>
+    );
+    */
+    /*
+    const h3 = React.createElement(
+      "h3",
+      { id: "title", onMouseEnter: () => console.log("mouse enter") },
+      "안녕 나는 span "
+    );*/
+
+    // JSX
+    function Button() {
+      return (
+        <button
+          style={{ backgroundColor: "salmon" }}
+          onClick={() => console.log("클릭됨")}
+        >
+          Click me
+        </button>
+      );
+    }
+    /*
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("클릭됨"), //이벤트 리스너
+        style: {
+          backgroundColor: "salmon",
+          color: "#fff",
+        },
+      },
+      "Click me"
+    );*/
+
+    // 대문자 소문자 차이 주의
+
+    const Container = () => (
+      <div>
+        <button>Hello</button>
+        <Title />
+        <Button />
+      </div>
+    );
+    /*
+    const Container = (
+      <div>
+        <button>Hello</button>
+        <Title />
+        <Button />
+      </div>
+    );*/
+    // const container = React.createElement("div", null, [Title, Button]);
+    // ReactDOM.render(Container, root);
+    ReactDOM.render(<Container />, root);
+  </script>
+</html>

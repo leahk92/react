@@ -1,0 +1,42 @@
+<!-- 리액트 입문 -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- React JS : interactivity의 원동력 -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <!-- ReactDOM : React element를 HTML으로 바꿔 줌 -->
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    const root = document.getElementById("root");
+    const h3 = React.createElement(
+      "h3",
+      { id: "title", onMouseEnter: () => console.log("mouse enter") },
+      "안녕 나는 span "
+    );
+    // const span = React.createElement(
+    //   "span",
+    //   { id: "lovely-span", style: { color: "salmon", fontWeight: "800" } },
+    //   "안녕 나는 span "
+    // );
+    // const btn = React.createElement("button", null, "Click me");
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("클릭됨"), //이벤트 리스너
+        style: {
+          backgroundColor: "salmon",
+          color: "#fff",
+        },
+      },
+      "Click me"
+    );
+
+    // const container = React.createElement("div", null, [span, btn]);
+    const container = React.createElement("div", null, [h3, btn]);
+    // ReactDOM.render(span, root);
+    // ReactDOM.render(btn, root);
+    ReactDOM.render(container, root);
+  </script>
+</html>
