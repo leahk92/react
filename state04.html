@@ -19,15 +19,15 @@
     // 두 번째 element는 첫 번째 element를 수정하는 modifier함수
     function App() {
       const [amount, setAmount] = React.useState(0);
-      const [flipped, setFlipped] = React.useState(false);
+      const [inverted, setInverted] = React.useState(false);
       const onChange = (event) => {
         // console.log(event.target.value);
         setAmount(event.target.value);
       };
       const reset = () => setAmount(0);
-      const onFlip = () => {
+      const onInvert = () => {
         reset();
-        setFlipped((current) => !current);
+        setInverted((current) => !current);
       };
 
       return (
@@ -39,29 +39,31 @@
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={flipped ? amount * 60 : amount}
+              value={inverted ? amount * 60 : amount}
               id="minutes"
               placeholder="Minutes"
               type="number"
               onChange={onChange}
-              //   disabled={flipped === true}
-              disabled={flipped}
+              //   disabled={inverted === true}
+              disabled={inverted}
             />
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={flipped ? amount : amount / 60}
+              value={inverted ? amount : amount / 60}
               id="hours"
               placeholder="Hours"
               type="number"
-              //   disabled={flipped === false}
-              disabled={!flipped}
+              //   disabled={inverted === false}
+              disabled={!inverted}
               onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
-          <button onClick={onFlip}>Flipped</button>
+          <button onClick={onInvert}>
+            {inverted ? "turn back" : "invert"}
+          </button>
         </div>
 
         // HTML에서
