@@ -1,0 +1,42 @@
+<!-- state : 데이터가 저장되는 곳 -->
+<!-- 데이터가 바뀔 때마다 함수 재호출 >> re-rendering 개선 필요 -->
+<!-- React 앱 내에서 데이터를 보관하고 자동으로 re-rendring 할 수 있다 -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- 바벨 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // state02 개선
+    // counter값이 다른데서 변경되는 버그가 생길수도 있다
+    // (예상치못한 업데이트 미연에 방지)
+
+    // state를 바꾸는 2가지 방법
+    // 1) 직접 값 설정하기
+    // 2) setCounter를 이용해 원하는 값 넣기
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        // setCounter(counter + 1);
+        // ** setCounter 안에 함수 넣을 수 있음 **
+        // 첫 번째 argument : 현재 값, return : 새로운 state 값
+        setCounter((current) => current + 1);
+        // ➡ 함수가 뭘 return하든지 그것이 새로운 state가 됨 - 더 안전한 방법
+      };
+
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

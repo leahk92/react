@@ -1,0 +1,81 @@
+<!-- inputs and state -->
+<!-- unit conversion 단위 변환 앱 -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- 바벨 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+
+    // 리액트에서 input은 uncontrolled => 우리가 value를 통제할수x
+    //  ➡ useState의 데이터를 input의 value값으로 쓸 수 있다
+
+    // useState는 array를 제공하고 그 첫 번째 element가 현재 값
+    // 두 번째 element는 첫 번째 element를 수정하는 modifier함수
+    function App() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        // console.log(event.target.value);
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+
+      return (
+        // JSX에서
+        // class > className
+        // for > htmlFor
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={flipped ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              //   disabled={flipped === true}
+              disabled={flipped}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={flipped ? amount : amount / 60}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              //   disabled={flipped === false}
+              disabled={!flipped}
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flipped</button>
+        </div>
+
+        // HTML에서
+        /*
+        <div>
+          <h1>Super Converter</h1>
+          <label for="minutes">Minutes</label>
+          <input id="minutes" placeholder="Minutes" type="number" />
+          <label for="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
+        </div>
+        */
+      );
+    }
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
