@@ -1,0 +1,64 @@
+<!-- inputs and state -->
+<!-- unit conversion 단위 변환 앱 -->
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- 바벨 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // 컴포넌트 == 함수 - 어떤 JSX를 반환하는 함수
+    // props : Btn으로부터 전달받는 properties
+    // props는 object이다. props.banana : props안에 banana
+
+    // function Btn(props) { ... {props.banana} ... }
+    // 지름길 방법
+    function Btn({ banana, big }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: 10,
+            border: 0,
+            fontSize: big ? 18 : 12,
+          }}
+        >
+          {banana}
+        </button>
+      );
+    }
+    /*
+    function ConfirmBtn() {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: 10,
+            border: 0,
+          }}
+        >
+          Confirm
+        </button>
+      );
+    }
+*/
+    function App() {
+      return (
+        <div>
+          <Btn banana="Save Changes" big={true} />
+          <Btn banana="Continue" big={false} />
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
