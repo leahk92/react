@@ -1,3 +1,5 @@
+<!-- prop types -->
+
 <!DOCTYPE html>
 <html lang="en">
   <body>
@@ -5,6 +7,8 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <!-- prop types -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <!-- 바벨 -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
@@ -12,10 +16,9 @@
     // props : Btn으로부터 전달받는 properties
     // props는 object이다. props.banana : props안에 banana
 
-    function Btn({ text, changeValue }) {
+    function Btn({ text, fontSize = 12 }) {
       return (
         <button
-          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
@@ -23,23 +26,22 @@
             borderRadius: 10,
             border: 0,
             fontSize: 16,
+            fontSize: fontSize,
           }}
         >
           {text}
         </button>
       );
     }
-
-    // 리액트메모
-    const MemorizedBtn = React.memo(Btn);
-
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
     function App() {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn text={value} changeValue={changeValue} />
-          <MemorizedBtn text="Continue" />
+          <Btn text="Save Changes" fontSize={21} />
+          <Btn text={"continue"} />
         </div>
       );
     }
